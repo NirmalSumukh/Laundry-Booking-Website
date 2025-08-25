@@ -1,0 +1,129 @@
+<!-- backend/views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= title || 'Laundry Booking' %></title>
+  <link rel="stylesheet" href="/styles/main.css" />
+  <script>
+    // If backend sends a token (after Google OAuth success), expose it to front-end
+    window.__TOKEN__ = "<%= typeof token !== 'undefined' ? token : '' %>";
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Laundry Booking</div>
+    <div class="nav-actions">
+      <% if (loggedIn) { %>
+        <span>Welcome, <%= user?.name || 'User' %></span>
+        <!-- In a real app, implement logout route -->
+        <button onclick="localStorage.removeItem('lb_jwt'); location.reload()">Logout</button>
+      <% } else { %>
+        <!-- Google OAuth start -->
+        <a class="btn" href="/api/auth/google">Login with Google</a>
+      <% } %>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1 class="hero-title">Fast. Clean. Delivered.</h1>
+    <p>Book your laundry pickup and pay securely with Razorpay.</p>
+  </header>
+
+  <main class="container">
+    <% if (loggedIn) { %>
+      <section class="card">
+        <h2>Create a new order</h2>
+        <form id="orderForm">
+          <div class="grid">
+            <div>
+              <label>Item Type</label>
+              <input id="item_type" placeholder="e.g., Shirt" required />
+            </div>
+            <div>
+              <label>Quantity</label>
+              <input id="item_qty" type="number" min="1" value="1" required />
+            </div>
+            <div class="span-2">
+              <label>Item Notes</label>
+              <input id="item_notes" placeholder="e.g., Stain on sleeve" />
+            </div>
+            <div class="span-2">
+              <label>Pickup Address Line 1</label>
+              <input id="addr_line1" required />
+            </div>
+            <div class="span-2">
+              <label>Pickup Address Line 2</label>
+              <input id="addr_line2" />
+            </div>
+            <div>
+              <label>City</label>
+              <input id="addr_city" required />
+            </div>
+            <div>
+              <label>State</label>
+              <input id="addr_state" required />
+            </div>
+            <div>
+              <label>Pincode</label>
+              <input id="addr_pincode" required />
+            </div>
+            <div>
+              <label>High Priority?</label>
+              <input id="high_priority" type="checkbox" />
+            </div>
+            <div class="span-2">
+              <label>Customer Notes</label>
+              <input id="notes" />
+            </div>
+            <div class="span-2">
+              <label>Amount (paise)</label>
+              <input id="amount_paise" type="number" min="1000" value="49900" required />
+              <small>49900 paise = ₹499</small>
+            </div>
+          </div>
+          <button class="btn primary" type="submit">Create Order & Pay</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Admin Actions</h2>
+        <p>Admins can view and update orders below. Requires admin JWT.</p>
+
+        <form id="statusForm" class="inline-form">
+          <input id="status_order_id" placeholder="Order ID" required />
+          <select id="status_select">
+            <option value="confirmed">confirmed</option>
+            <option value="in_progress">in_progress</option>
+            <option value="out_for_delivery">out_for_delivery</option>
+            <option value="delivered">delivered</option>
+            <option value="cancelled">cancelled</option>
+          </select>
+          <button class="btn">Update Status</button>
+        </form>
+
+        <div id="admin_orders" class="scroll"></div>
+      </section>
+    <% } else { %>
+      <section class="card">
+        <h2>How it works</h2>
+        <ol>
+          <li>Login with Google</li>
+          <li>Create your order and confirm pickup address</li>
+          <li>Pay securely with Razorpay</li>
+          <li>Track status: confirmed → in_progress → out_for_delivery → delivered</li>
+        </ol>
+      </section>
+    <% } %>
+  </main>
+
+  <script src="/scripts/main.js"></script>
+  <script src="/scripts/notifications.js"></script>
+  <script src="/scripts/auth.js"></script>
+  <!-- Load Razorpay SDK globally here for convenience -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="/scripts/order.js"></script>
+  <script src="/scripts/admin.js"></script>
+</body>
+</html>

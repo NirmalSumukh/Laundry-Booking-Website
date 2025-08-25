@@ -1,0 +1,122 @@
+/* frontend/public/styles/main.css */
+:root {
+  --primary: #0ea5e9;
+  --bg: #0b1220;
+  --card: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #22c55e;
+  --danger: #ef4444;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+
+.nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: #0f172a; position: sticky; top: 0; z-index: 10; }
+.brand { font-weight: 700; }
+.nav .btn { background: var(--primary); color: white; padding: 8px 12px; border-radius: 8px; text-decoration: none; }
+
+.hero { text-align: center; padding: 40px 20px; }
+.hero-title { font-size: 40px; opacity: 0; transform: translateY(10px); transition: all .6s ease; }
+.hero-title.fade-in { opacity: 1; transform: none; }
+
+.container { max-width: 960px; margin: 0 auto; padding: 12px; }
+
+.card { background: var(--card); border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid #1f2937; }
+
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.grid .span-2 { grid-column: span 2; }
+
+input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #374151; background: #0b1220; color: var(--text); }
+
+.btn { background: #2f3746; border: none; border-radius: 8px; padding: 10px 12px; color: var(--text); cursor: pointer; }
+.btn.primary { background: var(--primary); color: #fff; }
+
+.inline-form { display: flex; gap: 8px; align-items: center; }
+.scroll { overflow: auto; max-height: 320px; }
+
+.orders-table { width: 100%; border-collapse: collapse; }
+.orders-table th, .orders-table td { border: 1px solid #374151; padding: 8px; }
+
+.toast { position: fixed; bottom: 20px; right: 20px; background: #111827; color: #fff; padding: 12px 16px; border-radius: 8px; opacity: 0; transform: translateY(10px); transition: all .3s ease; border: 1px solid #374151; }
+.toast.visible { opacity: 1; transform: none; }
+
+/* Add these to your existing main.css */
+
+.secondary {
+  background: #374151 !important;
+  color: var(--text) !important;
+}
+
+.secondary:hover {
+  background: #4b5563 !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+  
+  .nav-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .container {
+    padding: 8px;
+  }
+  
+  .hero-title {
+    font-size: 28px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Enhanced button styles */
+.btn {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  border: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn.primary:hover {
+  background: #0284c7;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

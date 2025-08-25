@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= title || 'Admin Panel - Laundry Booking' %></title>
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/admin.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">
+      <a href="/" class="brand-link">Laundry Booking</a>
+      <span class="admin-badge">Admin Panel</span>
+    </div>
+    <div class="nav-actions">
+      <span class="user-info">Admin: <%= user?.name || 'Administrator' %></span>
+      <a href="/api/auth/logout" class="btn secondary">Logout</a>
+    </div>
+  </nav>
+
+  <div class="admin-container">
+    <div class="admin-sidebar">
+      <div class="sidebar-menu">
+        <a href="#orders" class="menu-item active" data-section="orders">
+          <span class="menu-icon">📦</span>
+          Manage Orders
+        </a>
+        <a href="#analytics" class="menu-item" data-section="analytics">
+          <span class="menu-icon">📊</span>
+          Analytics
+        </a>
+        <a href="#customers" class="menu-item" data-section="customers">
+          <span class="menu-icon">👥</span>
+          Customers
+        </a>
+      </div>
+    </div>
+
+    <div class="admin-main">
+      <!-- Orders Management Section -->
+      <div class="admin-section active" id="orders">
+        <div class="section-header">
+          <h2>Order Management</h2>
+          <p>View and manage customer orders</p>
+        </div>
+
+        <!-- Order Filters -->
+        <div class="filters-container">
+          <div class="filter-group">
+            <label for="status_filter">Status:</label>
+            <select id="status_filter">
+              <option value="">All Statuses</option>
+              <option value="pending_payment">Pending Payment</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="in_progress">In Progress</option>
+              <option value="out_for_delivery">Out for Delivery</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label for="priority_filter">Priority:</label>
+            <select id="priority_filter">
+              <option value="">All Priorities</option>
+              <option value="true">High Priority</option>
+              <option value="false">Normal Priority</option>
+            </select>
+          </div>
+          
+          <button id="refresh_orders" class="btn secondary">Refresh</button>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="orders-table-container">
+          <div id="admin_orders" class="orders-display">
+            <!-- Orders will be loaded here -->
+          </div>
+        </div>
+
+        <!-- Quick Update Order Status -->
+        <div class="quick-update-container">
+          <h3>Quick Status Update</h3>
+          <form id="statusForm" class="status-form">
+            <div class="status-inputs">
+              <input type="text" id="status_order_id" placeholder="Order ID" required />
+              <select id="status_select" required>
+                <option value="">Select Status</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="in_progress">In Progress</option>
+                <option value="out_for_delivery">Out for Delivery</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <button type="submit" class="btn primary">Update Status</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Analytics Section -->
+      <div class="admin-section" id="analytics">
+        <div class="section-header">
+          <h2>Analytics Dashboard</h2>
+          <p>Business insights and statistics</p>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" id="total_orders">-</div>
+            <div class="stat-label">Total Orders</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="pending_orders">-</div>
+            <div class="stat-label">Pending Orders</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="completed_orders">-</div>
+            <div class="stat-label">Completed Orders</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="revenue">₹-</div>
+            <div class="stat-label">Total Revenue</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customers Section -->
+      <div class="admin-section" id="customers">
+        <div class="section-header">
+          <h2>Customer Management</h2>
+          <p>View and manage customer accounts</p>
+        </div>
+        <div id="customers_list" class="customers-container">
+          <!-- Customers will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/scripts/main.js"></script>
+  <script src="/scripts/notifications.js"></script>
+  <script src="/scripts/auth.js"></script>
+  <script src="/scripts/admin.js"></script>
+  <script src="/scripts/admin-dashboard.js"></script>
+</body>
+</html>
