@@ -1,8 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
-# Give it all in a single .md file. not in separate bits a single writing.
-
-```md
 # Laundry Booking Website
 
 Welcome to the **Laundry Booking Website**, a full-stack web application built with Node.js, Express.js, MongoDB, EJS templating, and integrated with Razorpay and Google OAuth 2.0 for payment and authentication respectively.
