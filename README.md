@@ -132,47 +132,7 @@ laundry-booking/
 
 ---
 
-## Sample CSS Styling for README
 
-```
-
-<style>
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f9fafb;
-  color: #111827;
-  padding: 1rem 2rem;
-}
-h1, h2 {
-  color: #0ea5e9;
-}
-code {
-  background: #e0f2fe;
-  padding: 0.2rem 0.4rem;
-  border-radius: 5px;
-  font-size: 0.9rem;
-}
-pre {
-  background: #bae6fd;
-  padding: 1rem;
-  border-radius: 8px;
-  overflow-x: auto;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
-}
-th, td {
-  border: 1px solid #d1d5db;
-  padding: 0.5rem 0.75rem;
-  text-align: left;
-}
-th {
-  background: #0284c7;
-  color: white;
-}
-</style>
 ```
 
 ---
@@ -187,6 +147,3 @@ Contributions and feature requests are welcome. Please open an issue or pull req
 🚀  
 ```
 
-<span style="display:none">[^1][^10][^11][^12][^13][^14][^15][^16][^17][^18][^19][^2][^20][^3][^4][^5][^6][^7][^8][^9]</span>
-
-<div style="text-align: center">⁂</div>
